@@ -1,93 +1,65 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+// src/app/page.js
 
-export default function Home() {
+import Slider from '../components/Slider';
+import styles from './page.module.css';
+
+export default async function Home() {
+  // 서버 컴포넌트에서 데이터 가져오기
+  const res = await fetch('http://localhost:8080/api/v1/search/video', {
+    cache: 'no-store',
+  });
+  const json = await res.json();
+
+  const slidesData = json.data || [];
+
+  const slides = slidesData.map((video) => ({
+    title: video.title,
+    speaker: '', // 연사 정보가 없으므로 빈 문자열로 설정
+    description: video.description,
+    thumbnailUrl: video.thumbnailUrl || '/default-thumbnail.jpg',
+    youtubeVideoId: video.youtubeVideoId,
+  }));
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+    <div>
+      {/* 헤더 영역 */}
+      <header className={styles.header}>
+        <nav className={styles.nav}>
+          <div className={styles.logo}>
+            <h1>컨퍼런스 플랫폼</h1>
+          </div>
+          <div>
+            <a href="#">홈</a>
+            <a href="#">컨퍼런스</a>
+            <a href="#">커뮤니티</a>
+            <a href="#">로그인</a>
+          </div>
+        </nav>
+        {/* 검색 기능 추가 */}
+        <div className={styles.searchBar}>
+          <input type="text" placeholder="요약본 검색..." />
+          <button>검색</button>
         </div>
+      </header>
+
+      {/* 메인 콘텐츠 영역 */}
+      <main className={styles.main}>
+        {/* 최신 및 인기 컨퍼런스 섹션 */}
+        <section>
+          <h2 className={styles.sectionTitle}>최신 및 인기 컨퍼런스 요약</h2>
+
+          {/* 슬라이더 컴포넌트 */}
+          <Slider slides={slides} />
+        </section>
+
+        {/* 추가 섹션은 필요에 따라 추가하세요 */}
       </main>
+
+      {/* 푸터 영역 */}
       <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
+        회사 정보 | 이용 약관 | 개인정보 처리방침 |{' '}
+        <a href="#" style={{ color: '#ecf0f1' }}>
+          문의하기
         </a>
       </footer>
     </div>
