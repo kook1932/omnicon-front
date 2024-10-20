@@ -5,14 +5,15 @@ import styles from './page.module.css';
 
 export default async function Home() {
   // 서버 컴포넌트에서 데이터 가져오기
-  const res = await fetch('http://localhost:8080/api/v1/search/video', {
+  const res = await fetch('http://localhost:8080/api/v1/videos', {
     cache: 'no-store',
   });
   const json = await res.json();
 
-  const slidesData = json.data || [];
+  const slidesData = json.data.content || [];
 
   const slides = slidesData.map((video) => ({
+    videoToken: video.videoToken, // videoToken 추가
     title: video.title,
     speaker: '', // 연사 정보가 없으므로 빈 문자열로 설정
     description: video.description,

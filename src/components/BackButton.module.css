@@ -1,0 +1,17 @@
+/* src/components/BackButton.module.css */
+
+.backButton {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    background-color: #2980b9;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.backButton:hover {
+background-color: #1f5f85;
+}

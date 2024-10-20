@@ -20,6 +20,7 @@
     min-width: 100%;
     box-sizing: border-box;
     padding: 20px;
+    cursor: pointer; /* 커서 스타일 추가 */
   }
   
   .slide h3 {
