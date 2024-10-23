@@ -1,0 +1,63 @@
+/* src/components/BannerSlider.module.css */
+
+.slider {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto 40px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+  }
+  
+  .slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 100%;
+  }
+  
+  .slide {
+    min-width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .bannerContent {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+  }
+  
+  .bannerContent h2 {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  .bannerContent p {
+    margin: 5px 0 0;
+    font-size: 16px;
+  }
+  
+  .sliderNav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+  }
+  
+  .sliderNav button {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .sliderNav button:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
