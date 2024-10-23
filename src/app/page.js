@@ -1,7 +1,7 @@
 // src/app/page.js
 
 import BannerSlider from '../components/BannerSlider';
-import Slider from '../components/Slider';
+import CardList from '../components/CardList';
 import styles from './page.module.css';
 import SearchBar from '../components/SearchBar'; // 추가
 
@@ -13,16 +13,17 @@ export default async function Home() {
   const bannerJson = await bannerRes.json();
   const banners = bannerJson.data || [];
 
-  const res = await fetch('http://localhost:8080/api/v1/videos', {
+  const videos = await fetch('http://localhost:8080/api/v1/videos', {
     cache: 'no-store',
   });
-  const json = await res.json();
+  const videosJson = await videos.json();
 
-  const slidesData = json.data.content || [];
+  const cardData = videosJson.data.content || [];
 
-  const slides = slidesData.map((video) => ({
+  const cards = cardData.map((video) => ({
     videoToken: video.videoToken, // videoToken 추가
     title: video.title,
+    summary: video.summary,
     speaker: '', // 연사 정보가 없으므로 빈 문자열로 설정
     description: video.description,
     thumbnailUrl: video.thumbnailUrl || '/default-thumbnail.jpg',
@@ -36,7 +37,7 @@ export default async function Home() {
         <nav className={styles.nav}>
           {/* 로고 */}
           <div className={styles.logo}>
-            <h1>컨퍼런스 플랫폼</h1>
+            <h1>모두의 컨퍼런스</h1>
           </div>
 
           {/* 네비게이션 메뉴 */}
@@ -66,8 +67,8 @@ export default async function Home() {
         <section>
           <h2 className={styles.sectionTitle}>최신 및 인기 컨퍼런스 요약</h2>
 
-          {/* 슬라이더 컴포넌트 */}
-          <Slider slides={slides} />
+          {/* 카드 리스트 컴포넌트 */}
+          <CardList cards={cards} />
         </section>
 
         {/* 추가 섹션은 필요에 따라 추가하세요 */}

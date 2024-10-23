@@ -1,0 +1,66 @@
+/* src/components/CardList.module.css */
+
+.cardList {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 기본 5개의 열을 설정 */
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .cardImage {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .cardContent {
+    padding: 15px;
+  }
+  
+  .cardContent h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+  }
+  
+  .cardContent p {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  /* 반응형 처리 */
+  @media (max-width: 1512px) {
+    .cardList {
+      grid-template-columns: repeat(4, 1fr); /* 해상도 1512px 이하에서는 4개 */
+    }
+  }
+  
+  @media (max-width: 1200px) {
+    .cardList {
+      grid-template-columns: repeat(3, 1fr); /* 해상도 1200px 이하에서는 3개 */
+    }
+  }
+  
+  @media (max-width: 900px) {
+    .cardList {
+      grid-template-columns: repeat(2, 1fr); /* 해상도 900px 이하에서는 2개 */
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .cardList {
+      grid-template-columns: 1fr; /* 해상도 600px 이하에서는 1개 */
+    }
+  }
